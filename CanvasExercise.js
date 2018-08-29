@@ -10,7 +10,7 @@ const ORDER_TYPE_ALPHA = 0,
 
 class CanvasExercise {
 
-    constructor(canvasElementId, canvasWidth = '', imageSrc = '', cursorStyle = 'pointer',
+    constructor(canvasElementId, canvasWidth = '', imageSrc = '', 
                 lineWidth = '2', lineColor = '#000000', lineHead = false, fontFamily = 'Arial',
                 fontSize = '20', fontColor = '#000000', fontStyle = 'regular', fontAlign = 'center',
                 fontBaseline = 'middle', mark = 'X', orderType = ORDER_TYPE_NUM) {
@@ -20,7 +20,6 @@ class CanvasExercise {
         this._canvasWidth = canvasWidth;
         this._canvasDivisor = 0;
         this._imageSrc = imageSrc;
-        this._cursorStyle = cursorStyle;
         this._lineWidth = lineWidth;
         this._lineColor = lineColor;
         this._lineHead = lineHead;
@@ -32,6 +31,14 @@ class CanvasExercise {
         this._fontBaseline = fontBaseline;
         this._mark = mark;
         this._orderType = orderType;
+    }
+
+    static get orderTypeAlpha() {
+        return ORDER_TYPE_ALPHA;
+    }
+
+    static get orderTypeNum() {
+        return ORDER_TYPE_NUM;
     }
 
     _initializeCanvas() {

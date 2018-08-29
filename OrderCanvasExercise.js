@@ -8,7 +8,7 @@
 
 class OrderCanvasExercise extends CanvasExercise {
 
-    constructor(canvasElementId, canvasWidth = '', imageSrc = '', cursorStyle = 'pointer',
+    constructor(canvasElementId, canvasWidth = '', imageSrc = '', 
                 lineWidth = '2', lineColor = '#000000', lineHead = false, fontFamily = 'Arial',
                 fontSize = '20', fontColor = '#000000', fontStyle = 'regular', fontAlign = 'center',
                 fontBaseline = 'middle', mark = 'X', orderType = ORDER_TYPE_NUM,
@@ -40,7 +40,7 @@ class OrderCanvasExercise extends CanvasExercise {
             if (!this._isOrderedExercise(this._listObjectsOrdered, [current_x, current_y], this._canvasDivisor, this._lastOrderNumber, numberObjects)) {
 
                 // declaring variables
-                let x, y, x1, y1, cent_x, cent_y;
+                let x, y, x1, y1, cent_x, cent_y, order, tmp;
 
 
                 for (var i = 0; i < this._listObjectsCoords.length; i++) {
@@ -70,7 +70,14 @@ class OrderCanvasExercise extends CanvasExercise {
                         cent_y = Math.round(y1 - ((y1 - y) / 2));
 
                         // write order number
-                        ctx.fillText(this._lastOrderNumber.toString(), cent_x, cent_y);
+
+                        order = this._lastOrderNumber.toString();
+                        if (this._orderType === CanvasExercise.orderTypeAlpha) {
+                            tmp = Math.floor(this._lastOrderNumber / 26);
+                            order = (tmp >= 1 ? String.fromCharCode(64 + (this._lastOrderNumber / 26)) : '')
+                                + String.fromCharCode(64 + (this._lastOrderNumber % 26));
+                        }
+                        ctx.fillText(order, cent_x, cent_y);
 
                         // Fill rectangle
                         if (this._strokeRectObject) {
@@ -129,13 +136,13 @@ class OrderCanvasExercise extends CanvasExercise {
 OrderCanvasExercise.exports = OrderCanvasExercise;
 
 
-
 let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
 
 const ex = new OrderCanvasExercise('myCanvas');
 ex._listObjectsCoords = coords;
 ex._canvasWidth = 700;
 ex._imageSrc = 'plasma-desktop.jpg';
+// ex._orderType = CanvasExercise.orderTypeAlpha;
 ex._initializeCanvas();
 
 ex._canvasElement.addEventListener("click", function () {
