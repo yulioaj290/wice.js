@@ -10,7 +10,8 @@ class OrderCanvasExercise extends CanvasExercise {
 
     constructor(canvasElementId, canvasWidth = '', imageSrc = '', cursorStyle = 'pointer',
                 lineWidth = '2', lineColor = '#000000', lineHead = false, fontFamily = 'Arial',
-                fontSize = '20', fontColor = '#000000', mark = 'X', orderType = ORDER_TYPE_NUM,
+                fontSize = '20', fontColor = '#000000', fontStyle = 'regular', fontAlign = 'center',
+                fontBaseline = 'middle', mark = 'X', orderType = ORDER_TYPE_NUM,
                 // Below are specific class parameters
                 listObjectsCoords = [], strokeRectObject = true,) {
 
@@ -51,10 +52,10 @@ class OrderCanvasExercise extends CanvasExercise {
                     y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
 
                     // init text properties
-                    ctx.font = this._fontSize + this._fontFamily;
+                    ctx.font = `${this._fontStyle} ${this._fontSize}  ${this._fontFamily}`;
                     ctx.fillStyle = this._fontColor;
-                    // ctx.textAlign = 'center';
-                    // ctx.textBaseline = 'middle';
+                    ctx.textAlign = this._fontAlign;
+                    ctx.textBaseline = this._fontBaseline;
 
                     // alert(x + " <= " + cur_x + " - " + cur_x + " <= " + x1 + " --- " + y + " <= " + cur_y + " - " + cur_y + " <= " + y1);
                     var op = false;

@@ -12,7 +12,8 @@ class CanvasExercise {
 
     constructor(canvasElementId, canvasWidth = '', imageSrc = '', cursorStyle = 'pointer',
                 lineWidth = '2', lineColor = '#000000', lineHead = false, fontFamily = 'Arial',
-                fontSize = '20', fontColor = '#000000', mark = 'X', orderType = ORDER_TYPE_NUM) {
+                fontSize = '20', fontColor = '#000000', fontStyle = 'regular', fontAlign = 'center',
+                fontBaseline = 'middle', mark = 'X', orderType = ORDER_TYPE_NUM) {
 
         this._canvasElementId = canvasElementId;
         this._canvasElement = document.getElementById(this._canvasElementId);
@@ -26,6 +27,9 @@ class CanvasExercise {
         this._fontFamily = fontFamily;
         this._fontSize = fontSize;
         this._fontColor = fontColor;
+        this._fontStyle = fontStyle;
+        this._fontAlign = fontAlign;
+        this._fontBaseline = fontBaseline;
         this._mark = mark;
         this._orderType = orderType;
     }
