@@ -73,36 +73,41 @@ class CanvasExercise {
      * Initialize canvas element and load the image.
      * @private
      */
-    _initializeCanvas() {
+    initializeCanvas() {
 
         if (this._canvasElement.getContext) {
 
-            // getting 2d context from canvas element
-            let ctx = this._canvasElement.getContext("2d");
+            let img = new Image();      // Create new img element
 
-            let img = new Image(),      // Create new img element
-                that = this;            // referencing this variable
+            // binding function to load image, to the load event
+            img.addEventListener("load", this._onLoadImage.bind(this), false);
 
-            img.onload = function () {
-                let imageWidth = this.width,
-                    imageHeight = this.height;
-
-                // setting canvas divisor to use when width and/or display resolution changes
-                that._canvasDivisor = imageWidth / that._canvasWidth;
-
-                let finalWidth = Math.round(imageWidth / that._canvasDivisor),
-                    finalHeight = Math.round(imageHeight / that._canvasDivisor);
-
-                // setting canvas element dimensions
-                that._canvasElement.setAttribute('width', finalWidth.toString());
-                that._canvasElement.setAttribute('height', finalHeight.toString());
-
-                // drawing image
-                ctx.drawImage(img, 0, 0, imageWidth, imageHeight, 0, 0, finalWidth, finalHeight);
-            };
             // Set source path of image
             img.src = this._imageSrc;
         }
+    }
+
+    _onLoadImage(event) {
+
+        // getting image object, with and height
+        let img = event.currentTarget,
+            imageWidth = img.width,
+            imageHeight = img.height,
+        // getting 2d context from canvas element
+            ctx = this._canvasElement.getContext("2d");
+
+        // setting canvas divisor to use when width and/or display resolution changes
+        this._canvasDivisor = imageWidth / this._canvasWidth;
+
+        let finalWidth = Math.round(imageWidth / this._canvasDivisor),
+            finalHeight = Math.round(imageHeight / this._canvasDivisor);
+
+        // setting canvas element dimensions
+        this._canvasElement.setAttribute('width', finalWidth.toString());
+        this._canvasElement.setAttribute('height', finalHeight.toString());
+
+        // drawing image
+        ctx.drawImage(img, 0, 0, imageWidth, imageHeight, 0, 0, finalWidth, finalHeight);
     }
 }
 

@@ -199,7 +199,7 @@ ex._listObjectsCoords = coords;
 ex._canvasWidth = 700;
 ex._imageSrc = 'plasma-desktop.jpg';
 ex._orderType = CanvasExercise.orderTypeAlpha;
-ex._initializeCanvas();
+ex.initializeCanvas();
 
 ex._canvasElement.addEventListener("click", function () {
     document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsOrdered());
