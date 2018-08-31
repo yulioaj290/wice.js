@@ -87,6 +87,10 @@ class CanvasExercise {
         }
     }
 
+    clickAction(event){
+        
+    }
+
     _onLoadImage(event) {
 
         // getting image object, with and height

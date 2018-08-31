@@ -47,7 +47,7 @@ class OrderCanvasExercise extends CanvasExercise {
         this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
 
         // binding click event to canvas element to allow the order exercise execution
-        this._canvasElement.addEventListener("click", this.orderObject.bind(this), false);
+        this._canvasElement.addEventListener("click", this.clickAction.bind(this), false);
     }
 
     /**
@@ -56,7 +56,7 @@ class OrderCanvasExercise extends CanvasExercise {
      * @param event
      * @returns {*}
      */
-    orderObject(event) {
+    clickAction(event) {
         // Obtain mouse click position
         let current_x = event.pageX - event.currentTarget.offsetLeft,
             current_y = event.pageY - event.currentTarget.offsetTop;
@@ -191,18 +191,3 @@ OrderCanvasExercise.exports = OrderCanvasExercise;
 
 
 
-// Live execution of code
-let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
-
-const ex = new OrderCanvasExercise('myCanvas');
-ex._listObjectsCoords = coords;
-ex._canvasWidth = 700;
-ex._imageSrc = 'plasma-desktop.jpg';
-ex._orderType = CanvasExercise.orderTypeAlpha;
-ex.initializeCanvas();
-
-ex._canvasElement.addEventListener("click", function () {
-    document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsOrdered());
-}, false);
-
-console.log(ex);
