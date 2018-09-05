@@ -5,8 +5,32 @@
  * Created by WebStorm
  */
 
+/**
+ * GapMatchCanvasExercise extends from CanvasExercise superclass.
+ * Define the gap matching exercises
+ */
 class GapMatchCanvasExercise extends CanvasExercise {
 
+    /**
+     * Constructor of the GapMatchCanvasExercise class.
+     * @param canvasElementId
+     * @param canvasWidth
+     * @param imageSrc
+     * @param lineWidth
+     * @param lineColor
+     * @param lineHead
+     * @param fontFamily
+     * @param fontSize
+     * @param fontColor
+     * @param fontStyle
+     * @param fontAlign
+     * @param fontBaseline
+     * @param mark
+     * @param orderType
+     * @param listObjectsCoords
+     * @param listObjectsTags
+     * @param strokeRectObject
+     */
     constructor(canvasElementId, canvasWidth = '', imageSrc = '',
                 lineWidth = '2', lineColor = '#000000', lineHead = false, fontFamily = 'Arial',
                 fontSize = '20', fontColor = '#000000', fontStyle = 'regular', fontAlign = 'center',
@@ -23,7 +47,7 @@ class GapMatchCanvasExercise extends CanvasExercise {
         this._listObjectsTagged = [];                   // array to store the array of objects coordinates tagged by user
         this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
 
-        // binding click event to canvas element to allow the order exercise execution
+        // binding click event to canvas element to allow the gp match exercise execution
         this._canvasElement.addEventListener("click", this.clickAction.bind(this), false);
     }
 
@@ -37,11 +61,13 @@ class GapMatchCanvasExercise extends CanvasExercise {
             // getting 2d context from canvas element
             let ctx = this._canvasElement.getContext("2d");
 
+            // asking if object clicked was matched before
             if (!this._isTaggedExercise(this._listObjectsTagged, [current_x, current_y], this._canvasDivisor, this._listObjectsTags.length)) {
 
                 // declaring variables
-                let x, y, x1, y1, cent_x, cent_y, order, tmp, op;
+                let x, y, x1, y1, cent_x, cent_y, op;
 
+                // looping the list of objects coordinates
                 for (let i = 0; i < this._listObjectsCoords.length; i++) {
 
                     // Coordinates of the images
@@ -94,22 +120,42 @@ class GapMatchCanvasExercise extends CanvasExercise {
         }
     }
 
+    /**
+     * Return an array of objects coordinates in the image
+     * @returns {Array|*}
+     */
     getListObjectsCoords() {
         console.log(JSON.stringify(this._listObjectsCoords));
         return this._listObjectsCoords;
     }
 
+    /**
+     * Return an array of objects tags in the image
+     * @returns {Array|*}
+     */
     getListObjectsTags() {
         console.log(JSON.stringify(this._listObjectsTags));
         return this._listObjectsTags;
     }
 
+    /**
+     * Return an array of arrays. Each one contains the object coordinate and the tag assigned
+     * @returns {Array}
+     */
     getListObjectsTagged() {
         console.log(JSON.stringify(this._listObjectsTagged));
         return this._listObjectsTagged;
     }
 
-
+    /**
+     * Determine if the element selected by click coordinates have been matched before.
+     * @param objectsTagged
+     * @param current_xy
+     * @param divisor
+     * @param cantTagged
+     * @returns {boolean}
+     * @private
+     */
     _isTaggedExercise(objectsTagged, current_xy, divisor, cantTagged) {
         for (let i = 0; i < objectsTagged.length; i++) {
 
