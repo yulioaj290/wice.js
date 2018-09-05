@@ -70,6 +70,14 @@ class CanvasExercise {
     }
 
     /**
+     * Get mark used to Position Object over canvas image
+     * @returns {string|*}
+     */
+    getMark() {
+        return this._mark;
+    }
+
+    /**
      * Initialize canvas element and load the image.
      * @private
      */

@@ -47,10 +47,16 @@ class GapMatchCanvasExercise extends CanvasExercise {
         this._listObjectsTagged = [];                   // array to store the array of objects coordinates tagged by user
         this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
 
-        // binding click event to canvas element to allow the gp match exercise execution
+        // binding click event to canvas element to allow the gap match exercise execution
         this._canvasElement.addEventListener("click", this.clickAction.bind(this), false);
     }
 
+    /**
+     * Assign a Tag of object selected by click event over canvas element.
+     * This function uses the coordinates of the objects inside canvas element and the coordinates of the click event.
+     * @param event
+     * @returns {*}
+     */
     clickAction(event) {
         // Obtain mouse click position
         let current_x = event.pageX - event.currentTarget.offsetLeft,
@@ -173,23 +179,4 @@ class GapMatchCanvasExercise extends CanvasExercise {
     }
 }
 
-
-// Live execution of code
-let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]],
-    tags = ['Monitor', 'Settings', 'Cluster', 'Tasks'];
-
-const ex = new GapMatchCanvasExercise('myCanvas');
-ex._listObjectsCoords = coords;
-ex._listObjectsTags = tags;
-ex._canvasWidth = 700;
-ex._imageSrc = 'plasma-desktop.jpg';
-ex.initializeCanvas();
-
-document.getElementById("options").innerText = JSON.stringify(ex.getListObjectsTags());
-
-ex._canvasElement.addEventListener("click", function () {
-    document.getElementById("options").innerText = JSON.stringify(ex.getListObjectsTags());
-    document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsTagged());
-}, false);
-
-console.log(ex);
+GapMatchCanvasExercise.exports = GapMatchCanvasExercise;
