@@ -3,5 +3,11 @@
   "name": "WICE.js",
   "description": "WICE.js, for Web Interactive Canvas Exercises, is a library to create interactive exercises using HTML Canvas.",
   "repository": "https://github.com/yulioaj290/wice.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  },
+  "scripts": {
+    "build": "babel src -d build"
+  }
 }
