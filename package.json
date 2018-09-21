@@ -5,9 +5,8 @@
   "repository": "https://github.com/yulioaj290/wice.js",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   },
-  "scripts": {
-    "build": "babel src -d build"
-  }
+  "dependencies": {}
 }
