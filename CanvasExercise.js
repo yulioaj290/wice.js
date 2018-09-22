@@ -124,3 +124,4 @@ class CanvasExercise {
 }
 
 CanvasExercise.exports = CanvasExercise;
+

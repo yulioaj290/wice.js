@@ -188,6 +188,3 @@ class OrderCanvasExercise extends CanvasExercise {
 }
 
 OrderCanvasExercise.exports = OrderCanvasExercise;
-
-
-

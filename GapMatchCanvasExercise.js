@@ -180,3 +180,4 @@ class GapMatchCanvasExercise extends CanvasExercise {
 }
 
 GapMatchCanvasExercise.exports = GapMatchCanvasExercise;
+
