@@ -64,9 +64,9 @@ var PositionObjectCanvasExercise = function (_CanvasExercise) {
         var _this = _possibleConstructorReturn(this, (PositionObjectCanvasExercise.__proto__ || Object.getPrototypeOf(PositionObjectCanvasExercise)).call(this, canvasElementId, canvasWidth, imageSrc, lineWidth, lineColor, lineHead, fontFamily, fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType));
 
         _this._listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
-        _this._listObjectsPositioned = []; // array to store the array of objects coordinates positioned by user
+        _this._listObjectsAssociated = []; // array to store the array of objects coordinates positioned by user
         _this._strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
-        _this._numberObjectsPositioned = 0;
+        _this._numberAssociationsConnected = 0;
 
         // binding click event to canvas element to allow the position object exercise execution
         _this._canvasElement.addEventListener("click", _this.clickAction.bind(_this), false);
@@ -95,7 +95,7 @@ var PositionObjectCanvasExercise = function (_CanvasExercise) {
                 var ctx = this._canvasElement.getContext("2d");
 
                 // asking if there is elements to be positioned
-                if (this._numberObjectsPositioned < this._listObjectsCoords.length) {
+                if (this._numberAssociationsConnected < this._listObjectsCoords.length) {
 
                     // declaring variables
                     var x = void 0,
@@ -114,7 +114,7 @@ var PositionObjectCanvasExercise = function (_CanvasExercise) {
                     ctx.fillText(this._mark, current_x, current_y);
 
                     // decrement number of objects to be positioned
-                    this._numberObjectsPositioned++;
+                    this._numberAssociationsConnected++;
 
                     // looping the list of objects coordinates
                     for (var i = 0; i < this._listObjectsCoords.length; i++) {
@@ -143,7 +143,7 @@ var PositionObjectCanvasExercise = function (_CanvasExercise) {
                             }
 
                             // update list of positioned objects
-                            this._listObjectsPositioned[this._listObjectsPositioned.length] = this._listObjectsCoords[i];
+                            this._listObjectsAssociated[this._listObjectsAssociated.length] = this._listObjectsCoords[i];
 
                             op = true;
                         }
@@ -165,8 +165,8 @@ var PositionObjectCanvasExercise = function (_CanvasExercise) {
     }, {
         key: 'getListObjectsPositioned',
         value: function getListObjectsPositioned() {
-            console.log(JSON.stringify(this._listObjectsPositioned));
-            return this._listObjectsPositioned;
+            console.log(JSON.stringify(this._listObjectsAssociated));
+            return this._listObjectsAssociated;
         }
     }]);
 
@@ -175,29 +175,29 @@ var PositionObjectCanvasExercise = function (_CanvasExercise) {
 
 PositionObjectCanvasExercise.exports = PositionObjectCanvasExercise;
 
-// Live execution of code
-var coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
-
-var ex = new PositionObjectCanvasExercise('myCanvas');
-ex._listObjectsCoords = coords;
-ex._canvasWidth = 700;
-ex._imageSrc = 'plasma-desktop.jpg';
-ex.initializeCanvas();
-
-var marks = [];
-
-for (var i = 0; i < coords.length; i++) {
-    marks[i] = ex.getMark();
-}
-
-document.getElementById("options").innerText = JSON.stringify(marks);
-
-ex._canvasElement.addEventListener("click", function () {
-    marks.shift();
-    document.getElementById("options").innerText = JSON.stringify(marks);
-    document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsPositioned());
-}, false);
-
-console.log(ex);
+// // Live execution of code
+// let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
+//
+// const ex = new PositionObjectCanvasExercise('myCanvas');
+// ex._listObjectsCoords = coords;
+// ex._canvasWidth = 700;
+// ex._imageSrc = 'plasma-desktop.jpg';
+// ex.initializeCanvas();
+//
+// let marks = [];
+//
+// for (let i = 0; i < coords.length; i++) {
+//     marks[i] = ex.getMark();
+// }
+//
+// document.getElementById("options").innerText = JSON.stringify(marks);
+//
+// ex._canvasElement.addEventListener("click", function () {
+//     marks.shift();
+//     document.getElementById("options").innerText = JSON.stringify(marks);
+//     document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsAssociated());
+// }, false);
+//
+// console.log(ex);
 
 //# sourceMappingURL=PositionObjectCanvasExercise-compiled.js.map

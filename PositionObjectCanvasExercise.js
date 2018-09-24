@@ -43,9 +43,9 @@ class PositionObjectCanvasExercise extends CanvasExercise {
 
         // own properties of the class
         this._listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
-        this._listObjectsPositioned = [];               // array to store the array of objects coordinates positioned by user
+        this._listObjectsAssociated = [];               // array to store the array of objects coordinates positioned by user
         this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
-        this._numberObjectsPositioned = 0;
+        this._numberAssociationsConnected = 0;
 
         // binding click event to canvas element to allow the position object exercise execution
         this._canvasElement.addEventListener("click", this.clickAction.bind(this), false);
@@ -69,7 +69,7 @@ class PositionObjectCanvasExercise extends CanvasExercise {
             let ctx = this._canvasElement.getContext("2d");
 
             // asking if there is elements to be positioned
-            if (this._numberObjectsPositioned < this._listObjectsCoords.length) {
+            if (this._numberAssociationsConnected < this._listObjectsCoords.length) {
 
                 // declaring variables
                 let x, y, x1, y1, op;
@@ -84,7 +84,7 @@ class PositionObjectCanvasExercise extends CanvasExercise {
                 ctx.fillText(this._mark, current_x, current_y);
 
                 // decrement number of objects to be positioned
-                this._numberObjectsPositioned++;
+                this._numberAssociationsConnected++;
 
                 // looping the list of objects coordinates
                 for (let i = 0; i < this._listObjectsCoords.length; i++) {
@@ -114,7 +114,7 @@ class PositionObjectCanvasExercise extends CanvasExercise {
                         }
 
                         // update list of positioned objects
-                        this._listObjectsPositioned[this._listObjectsPositioned.length] = this._listObjectsCoords[i];
+                        this._listObjectsAssociated[this._listObjectsAssociated.length] = this._listObjectsCoords[i];
 
                         op = true;
                     }
@@ -133,35 +133,35 @@ class PositionObjectCanvasExercise extends CanvasExercise {
      * @returns {Array}
      */
     getListObjectsPositioned() {
-        console.log(JSON.stringify(this._listObjectsPositioned));
-        return this._listObjectsPositioned;
+        console.log(JSON.stringify(this._listObjectsAssociated));
+        return this._listObjectsAssociated;
     }
 }
 
 PositionObjectCanvasExercise.exports = PositionObjectCanvasExercise;
 
 
-// Live execution of code
-let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
-
-const ex = new PositionObjectCanvasExercise('myCanvas');
-ex._listObjectsCoords = coords;
-ex._canvasWidth = 700;
-ex._imageSrc = 'plasma-desktop.jpg';
-ex.initializeCanvas();
-
-let marks = [];
-
-for (let i = 0; i < coords.length; i++) {
-    marks[i] = ex.getMark();
-}
-
-document.getElementById("options").innerText = JSON.stringify(marks);
-
-ex._canvasElement.addEventListener("click", function () {
-    marks.shift();
-    document.getElementById("options").innerText = JSON.stringify(marks);
-    document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsPositioned());
-}, false);
-
-console.log(ex);
+// // Live execution of code
+// let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
+//
+// const ex = new PositionObjectCanvasExercise('myCanvas');
+// ex._listObjectsCoords = coords;
+// ex._canvasWidth = 700;
+// ex._imageSrc = 'plasma-desktop.jpg';
+// ex.initializeCanvas();
+//
+// let marks = [];
+//
+// for (let i = 0; i < coords.length; i++) {
+//     marks[i] = ex.getMark();
+// }
+//
+// document.getElementById("options").innerText = JSON.stringify(marks);
+//
+// ex._canvasElement.addEventListener("click", function () {
+//     marks.shift();
+//     document.getElementById("options").innerText = JSON.stringify(marks);
+//     document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsAssociated());
+// }, false);
+//
+// console.log(ex);
