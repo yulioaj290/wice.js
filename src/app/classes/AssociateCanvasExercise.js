@@ -207,7 +207,7 @@ const ex = new AssociateCanvasExercise('myCanvas');
 ex._listObjectsCoords = coords;
 ex._listObjectsConnections = connections;
 ex._canvasWidth = 700;
-ex._imageSrc = 'plasma-desktop.jpg';
+ex._imageSrc = 'img/plasma-desktop.jpg';
 ex.initializeCanvas();
 
 let marks = [];

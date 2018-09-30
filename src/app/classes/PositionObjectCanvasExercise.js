@@ -5,7 +5,7 @@
  * Created by WebStorm
  */
 
-
+ 
 /**
  * PositionObjectCanvasExercise extends from CanvasExercise superclass.
  * Define the position object exercises

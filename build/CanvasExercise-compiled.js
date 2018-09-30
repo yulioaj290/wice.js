@@ -160,5 +160,3 @@ var CanvasExercise = function () {
 }();
 
 CanvasExercise.exports = CanvasExercise;
-
-//# sourceMappingURL=CanvasExercise-compiled.js.map
