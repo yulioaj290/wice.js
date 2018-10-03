@@ -8,12 +8,21 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
+    "conventional-github-releaser": "^3.1.2",
+    "env2": "^2.2.2",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
+    "gulp-bump": "^3.1.1",
     "gulp-concat": "^2.6.1",
+    "gulp-conventional-changelog": "^2.0.3",
+    "gulp-git": "^2.8.0",
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-terser": "^1.1.5"
+    "gulp-terser": "^1.1.5",
+    "gulp-util": "^3.0.8",
+    "minimist": "^1.2.0",
+    "run-sequence": "^2.2.1"
   },
   "dependencies": {}
 }
