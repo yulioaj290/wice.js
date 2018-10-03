@@ -198,32 +198,3 @@ class AssociateCanvasExercise extends CanvasExercise {
 
 AssociateCanvasExercise.exports = AssociateCanvasExercise;
 
-
-// Live execution of code
-let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]],
-    connections = [[[36, 352, 88, 404], [520, 20, 590, 76]], [[36, 352, 88, 404]], [[395, 120, 715, 370], [520, 20, 590, 76]], [[80, 35, 375, 283], [395, 120, 715, 370]]];
-
-const ex = new AssociateCanvasExercise('myCanvas');
-ex._listObjectsCoords = coords;
-ex._listObjectsConnections = connections;
-ex._canvasWidth = 700;
-ex._imageSrc = 'img/plasma-desktop.jpg';
-ex.initializeCanvas();
-
-let marks = [];
-
-for (let i = 0; i < ex._getNumberOfConnections(); i++) {
-    marks[i] = " | ";
-}
-
-document.getElementById("options").innerText = JSON.stringify(marks);
-
-ex._canvasElement.addEventListener("click", function () {
-    if (ex._beginClickCoord.length === 0) {
-        marks.shift();
-        document.getElementById("options").innerText = JSON.stringify(marks);
-        document.getElementById("result").innerText = JSON.stringify(ex.getListObjectsAssociated());
-    }
-}, false);
-
-console.log(ex);
