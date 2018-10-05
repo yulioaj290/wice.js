@@ -163,4 +163,4 @@ gulp.task('release', function (callback) {
 
 
 
-gulp.task('default', ['build', 'release']);
+gulp.task('default', ['build']);

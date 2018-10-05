@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
-  "name": "WICE.js",
+  "name": "wice.js",
   "description": "WICE.js, for Web Interactive Canvas Exercises, is a library to create interactive exercises using HTML Canvas.",
   "repository": "https://github.com/yulioaj290/wice.js",
   "license": "MIT",
@@ -24,5 +24,14 @@
     "minimist": "^1.2.0",
     "run-sequence": "^2.2.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "build": "npm run build:compile && npm run build:minify",
+    "build:compile": "gulp compile",
+    "build:minify": "gulp minify",
+    "release": "npm run release:patch",
+    "release:patch": "gulp release --git-version patch",
+    "release:minor": "gulp release --git-version minor",
+    "release:major": "gulp release --git-version major"
+  }
 }
