@@ -1,7 +1,7 @@
 # source 'https://rubygems.org'
 source 'http://nexus.prod.uci.cu/repository/rubygems-proxy/'
 
-gemspec
+#gemspec
 
 gem 'jekyll'
 gem 'jekyll-paginate'
