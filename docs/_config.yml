@@ -1,16 +1,18 @@
 # Setup
 theme: jekyll-theme-cayman
 
-title:        Project or Site name
-tagline:      A responsive theme for your project on GitHub Pages
+title:        Wice.js
+tagline:      WICE, acronym for Web Interactive Canvas Exercises, is a library to create interactive exercises using HTML Canvas.
+description:  WICE, acronym for Web Interactive Canvas Exercises, is a library to create interactive exercises using HTML Canvas.
 baseurl:      ""
 paginate:     1
 locale:       "en"
+show_downloads: true
 
 # About/contact
 author:
-  name:       Author name
-  url:        http://yourhomepage.com 
+  name:       Yulio Aleman Jimenez
+  url:        https://github.com/yulioaj290
 
 # Gems
 gems:
