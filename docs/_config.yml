@@ -1,5 +1,6 @@
 # Setup
-theme: jekyll-theme-cayman
+#theme: jekyll-theme-cayman
+remote_theme: pietromenna/jekyll-cayman-theme
 
 title:        Wice.js
 tagline:      WICE, acronym for Web Interactive Canvas Exercises, is a library to create interactive exercises using HTML Canvas.
