@@ -5,6 +5,8 @@ baseurl:      ""
 paginate:     1
 locale:       "en"
 
+theme: jekyll-theme-cayman
+
 # About/contact
 author:
   name:       Author name
