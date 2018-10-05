@@ -35,22 +35,22 @@ class CanvasExercise {
                 fontSize = '20', fontColor = '#000000', fontStyle = 'regular', fontAlign = 'center',
                 fontBaseline = 'middle', mark = 'X', orderType = ORDER_TYPE_NUM) {
 
-        this._canvasElementId = canvasElementId;    // define the canvas HTML element to link with
-        this._canvasElement = document.getElementById(this._canvasElementId);
-        this._canvasWidth = canvasWidth;
+        this.canvasElementId = canvasElementId;    // define the canvas HTML element to link with
+        this._canvasElement = document.getElementById(this.canvasElementId);
+        this.canvasWidth = canvasWidth;
         this._canvasDivisor = 0;
-        this._imageSrc = imageSrc;
-        this._lineWidth = lineWidth;
-        this._lineColor = lineColor;
-        this._lineHead = lineHead;
-        this._fontFamily = fontFamily;
-        this._fontSize = fontSize;
-        this._fontColor = fontColor;
-        this._fontStyle = fontStyle;
-        this._fontAlign = fontAlign;
-        this._fontBaseline = fontBaseline;
-        this._mark = mark;
-        this._orderType = orderType;
+        this.imageSrc = imageSrc;
+        this.lineWidth = lineWidth;
+        this.lineColor = lineColor;
+        this.lineHead = lineHead;
+        this.fontFamily = fontFamily;
+        this.fontSize = fontSize;
+        this.fontColor = fontColor;
+        this.fontStyle = fontStyle;
+        this.fontAlign = fontAlign;
+        this.fontBaseline = fontBaseline;
+        this.mark = mark;
+        this.orderType = orderType;
     }
 
     /**
@@ -74,7 +74,7 @@ class CanvasExercise {
      * @returns {string|*}
      */
     getMark() {
-        return this._mark;
+        return this.mark;
     }
 
     /**
@@ -91,7 +91,7 @@ class CanvasExercise {
             img.addEventListener("load", this._onLoadImage.bind(this), false);
 
             // Set source path of image
-            img.src = this._imageSrc;
+            img.src = this.imageSrc;
         }
     }
 
@@ -109,7 +109,7 @@ class CanvasExercise {
             ctx = this._canvasElement.getContext("2d");
 
         // setting canvas divisor to use when width and/or display resolution changes
-        this._canvasDivisor = imageWidth / this._canvasWidth;
+        this._canvasDivisor = imageWidth / this.canvasWidth;
 
         let finalWidth = Math.round(imageWidth / this._canvasDivisor),
             finalHeight = Math.round(imageHeight / this._canvasDivisor);

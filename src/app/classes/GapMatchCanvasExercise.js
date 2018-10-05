@@ -42,10 +42,10 @@ class GapMatchCanvasExercise extends CanvasExercise {
             fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType);
 
         // own properties of the class
-        this._listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
-        this._listObjectsTags = listObjectsTags;        // array of objects tags in the image
+        this.listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
+        this.listObjectsTags = listObjectsTags;        // array of objects tags in the image
         this._listObjectsTagged = [];                   // array to store the array of objects coordinates tagged by user
-        this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
+        this.strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
 
         // binding click event to canvas element to allow the gap match exercise execution
         this._canvasElement.addEventListener("click", this.clickAction.bind(this), false);
@@ -68,27 +68,27 @@ class GapMatchCanvasExercise extends CanvasExercise {
             let ctx = this._canvasElement.getContext("2d");
 
             // asking if object clicked was matched before
-            if (!this._isTaggedExercise(this._listObjectsTagged, [current_x, current_y], this._canvasDivisor, this._listObjectsTags.length)) {
+            if (!this._isTaggedExercise(this._listObjectsTagged, [current_x, current_y], this._canvasDivisor, this.listObjectsTags.length)) {
 
                 // declaring variables
                 let x, y, x1, y1, cent_x, cent_y, op;
 
                 // looping the list of objects coordinates
-                for (let i = 0; i < this._listObjectsCoords.length; i++) {
+                for (let i = 0; i < this.listObjectsCoords.length; i++) {
 
                     // Coordinates of the images
                     // The canvas divisor allow to calc the exact position of every coordinate,
                     // even if the canvas element is positioned anywhere inside the web page
-                    x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-                    y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-                    x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-                    y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+                    x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+                    y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+                    x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+                    y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
                     // init text properties
-                    ctx.font = `${this._fontStyle} ${this._fontSize}  ${this._fontFamily}`;
-                    ctx.fillStyle = this._fontColor;
-                    ctx.textAlign = this._fontAlign;
-                    ctx.textBaseline = this._fontBaseline;
+                    ctx.font = `${this.fontStyle} ${this.fontSize}  ${this.fontFamily}`;
+                    ctx.fillStyle = this.fontColor;
+                    ctx.textAlign = this.fontAlign;
+                    ctx.textBaseline = this.fontBaseline;
 
                     // loop control variable
                     op = false;
@@ -96,24 +96,24 @@ class GapMatchCanvasExercise extends CanvasExercise {
                     // asking if a valid object was clicked, based on coordinates of objects and click event
                     if ((x <= current_x && current_x <= x1)
                         && (y <= current_y && current_y <= y1)
-                        && (this._listObjectsTags.length > 0)) {
+                        && (this.listObjectsTags.length > 0)) {
 
                         // coordinates of the object center
                         cent_x = Math.round(x1 - ((x1 - x) / 2));
                         cent_y = Math.round(y1 - ((y1 - y) / 2));
 
                         // write tag string
-                        ctx.fillText(this._listObjectsTags[0], cent_x, cent_y);
+                        ctx.fillText(this.listObjectsTags[0], cent_x, cent_y);
 
                         // Fill rectangle
-                        if (this._strokeRectObject) {
-                            ctx.lineWidth = this._lineWidth;
-                            ctx.strokeStyle = this._lineColor;
+                        if (this.strokeRectObject) {
+                            ctx.lineWidth = this.lineWidth;
+                            ctx.strokeStyle = this.lineColor;
                             ctx.strokeRect(x, y, x1 - x, y1 - y);
                         }
 
                         // update tagged exercises
-                        this._listObjectsTagged[this._listObjectsTagged.length] = [this._listObjectsTags.shift(), this._listObjectsCoords[i]];
+                        this._listObjectsTagged[this._listObjectsTagged.length] = [this.listObjectsTags.shift(), this.listObjectsCoords[i]];
 
                         op = true;
                     }
@@ -131,8 +131,8 @@ class GapMatchCanvasExercise extends CanvasExercise {
      * @returns {Array|*}
      */
     getListObjectsCoords() {
-        console.log(JSON.stringify(this._listObjectsCoords));
-        return this._listObjectsCoords;
+        console.log(JSON.stringify(this.listObjectsCoords));
+        return this.listObjectsCoords;
     }
 
     /**
@@ -140,8 +140,8 @@ class GapMatchCanvasExercise extends CanvasExercise {
      * @returns {Array|*}
      */
     getListObjectsTags() {
-        console.log(JSON.stringify(this._listObjectsTags));
-        return this._listObjectsTags;
+        console.log(JSON.stringify(this.listObjectsTags));
+        return this.listObjectsTags;
     }
 
     /**

@@ -43,10 +43,10 @@ class AssociateCanvasExercise extends CanvasExercise {
             fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType);
 
         // own properties of the class
-        this._listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
-        this._listObjectsConnections = listObjectsConnections;    // array of objects connections in the image
+        this.listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
+        this.listObjectsConnections = listObjectsConnections;    // array of objects connections in the image
         this._listObjectsAssociated = [];               // array to store the array of objects coordinates associated by user
-        this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
+        this.strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
         this._beginClickCoord = [];                     // store the coordinates of the 1st click event in format [x,y]
         this._numberAssociationsConnected = 0;
 
@@ -93,8 +93,8 @@ class AssociateCanvasExercise extends CanvasExercise {
                         }
                     }
 
-                    ctx.lineWidth = this._lineWidth;
-                    ctx.strokeStyle = this._lineColor;
+                    ctx.lineWidth = this.lineWidth;
+                    ctx.strokeStyle = this.lineColor;
                     ctx.beginPath();
                     ctx.moveTo(this._beginClickCoord[0], this._beginClickCoord[1]);
                     ctx.lineTo(current_x, current_y);
@@ -123,9 +123,9 @@ class AssociateCanvasExercise extends CanvasExercise {
 
     _findBeginCoordsInConnections(beginObject) {
         // looping the list of objects coordinates
-        for (let i = 0; i < this._listObjectsCoords.length; i++) {
+        for (let i = 0; i < this.listObjectsCoords.length; i++) {
 
-            let value1 = JSON.stringify(this._listObjectsCoords[i]),
+            let value1 = JSON.stringify(this.listObjectsCoords[i]),
                 value2 = JSON.stringify(beginObject);
 
             // looking for the index of the begin object
@@ -137,9 +137,9 @@ class AssociateCanvasExercise extends CanvasExercise {
 
     _findEndCoordsInConnections(endObject, index) {
         // looping the list of objects connections coordinates
-        for (let i = 0; i < this._listObjectsConnections[index].length; i++) {
+        for (let i = 0; i < this.listObjectsConnections[index].length; i++) {
 
-            let value1 = JSON.stringify(this._listObjectsConnections[index][i]),
+            let value1 = JSON.stringify(this.listObjectsConnections[index][i]),
                 value2 = JSON.stringify(endObject);
 
             // looking for the index of the begin object
@@ -157,21 +157,21 @@ class AssociateCanvasExercise extends CanvasExercise {
         let x, y, x1, y1;
 
         // looping the list of objects coordinates
-        for (let i = 0; i < this._listObjectsCoords.length; i++) {
+        for (let i = 0; i < this.listObjectsCoords.length; i++) {
 
             // Coordinates of the images
             // The canvas divisor allow to calc the exact position of every coordinate,
             // even if the canvas element is positioned anywhere inside the web page
-            x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-            y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-            x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-            y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+            x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+            y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+            x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+            y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
             // asking if a valid object was clicked, based on coordinates of objects and click event
             if ((x <= coords[0] && coords[0] <= x1)
                 && (y <= coords[1] && coords[1] <= y1)) {
 
-                return this._listObjectsCoords[i];
+                return this.listObjectsCoords[i];
             }
         }
 
@@ -180,8 +180,8 @@ class AssociateCanvasExercise extends CanvasExercise {
 
     _getNumberOfConnections() {
         let counter = 0;
-        for (let i = 0; i < this._listObjectsConnections.length; i++) {
-            counter += this._listObjectsConnections[i].length;
+        for (let i = 0; i < this.listObjectsConnections.length; i++) {
+            counter += this.listObjectsConnections[i].length;
         }
         return counter;
     }

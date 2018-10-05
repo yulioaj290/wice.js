@@ -42,9 +42,9 @@ class PositionObjectCanvasExercise extends CanvasExercise {
             fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType);
 
         // own properties of the class
-        this._listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
+        this.listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
         this._listObjectsAssociated = [];               // array to store the array of objects coordinates positioned by user
-        this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
+        this.strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
         this._numberAssociationsConnected = 0;
 
         // binding click event to canvas element to allow the position object exercise execution
@@ -69,33 +69,33 @@ class PositionObjectCanvasExercise extends CanvasExercise {
             let ctx = this._canvasElement.getContext("2d");
 
             // asking if there is elements to be positioned
-            if (this._numberAssociationsConnected < this._listObjectsCoords.length) {
+            if (this._numberAssociationsConnected < this.listObjectsCoords.length) {
 
                 // declaring variables
                 let x, y, x1, y1, op;
 
                 // init text properties
-                ctx.font = `${this._fontStyle} ${this._fontSize}  ${this._fontFamily}`;
-                ctx.fillStyle = this._fontColor;
-                ctx.textAlign = this._fontAlign;
-                ctx.textBaseline = this._fontBaseline;
+                ctx.font = `${this.fontStyle} ${this.fontSize}  ${this.fontFamily}`;
+                ctx.fillStyle = this.fontColor;
+                ctx.textAlign = this.fontAlign;
+                ctx.textBaseline = this.fontBaseline;
 
                 // fill mark or letter
-                ctx.fillText(this._mark, current_x, current_y);
+                ctx.fillText(this.mark, current_x, current_y);
 
                 // decrement number of objects to be positioned
                 this._numberAssociationsConnected++;
 
                 // looping the list of objects coordinates
-                for (let i = 0; i < this._listObjectsCoords.length; i++) {
+                for (let i = 0; i < this.listObjectsCoords.length; i++) {
 
                     // Coordinates of the images
                     // The canvas divisor allow to calc the exact position of every coordinate,
                     // even if the canvas element is positioned anywhere inside the web page
-                    x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-                    y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-                    x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-                    y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+                    x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+                    y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+                    x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+                    y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
                     // alert(x + " <= " + cur_x + " - " + cur_x + " <= " + x1 + " --- " + y + " <= " + cur_y + " - " + cur_y + " <= " + y1);
 
@@ -107,14 +107,14 @@ class PositionObjectCanvasExercise extends CanvasExercise {
                         && (y <= current_y && current_y <= y1)) {
 
                         // fill rectangle
-                        if (this._strokeRectObject) {
-                            ctx.lineWidth = this._lineWidth;
-                            ctx.strokeStyle = this._lineColor;
+                        if (this.strokeRectObject) {
+                            ctx.lineWidth = this.lineWidth;
+                            ctx.strokeStyle = this.lineColor;
                             ctx.strokeRect(x, y, x1 - x, y1 - y);
                         }
 
                         // update list of positioned objects
-                        this._listObjectsAssociated[this._listObjectsAssociated.length] = this._listObjectsCoords[i];
+                        this._listObjectsAssociated[this._listObjectsAssociated.length] = this.listObjectsCoords[i];
 
                         op = true;
                     }
@@ -145,9 +145,9 @@ PositionObjectCanvasExercise.exports = PositionObjectCanvasExercise;
 // let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
 //
 // const ex = new PositionObjectCanvasExercise('myCanvas');
-// ex._listObjectsCoords = coords;
-// ex._canvasWidth = 700;
-// ex._imageSrc = 'plasma-desktop.jpg';
+// ex.listObjectsCoords = coords;
+// ex.canvasWidth = 700;
+// ex.imageSrc = 'plasma-desktop.jpg';
 // ex.initializeCanvas();
 //
 // let marks = [];

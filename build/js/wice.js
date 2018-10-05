@@ -58,22 +58,22 @@ var CanvasExercise = function () {
 
         _classCallCheck(this, CanvasExercise);
 
-        this._canvasElementId = canvasElementId; // define the canvas HTML element to link with
-        this._canvasElement = document.getElementById(this._canvasElementId);
-        this._canvasWidth = canvasWidth;
+        this.canvasElementId = canvasElementId; // define the canvas HTML element to link with
+        this._canvasElement = document.getElementById(this.canvasElementId);
+        this.canvasWidth = canvasWidth;
         this._canvasDivisor = 0;
-        this._imageSrc = imageSrc;
-        this._lineWidth = lineWidth;
-        this._lineColor = lineColor;
-        this._lineHead = lineHead;
-        this._fontFamily = fontFamily;
-        this._fontSize = fontSize;
-        this._fontColor = fontColor;
-        this._fontStyle = fontStyle;
-        this._fontAlign = fontAlign;
-        this._fontBaseline = fontBaseline;
-        this._mark = mark;
-        this._orderType = orderType;
+        this.imageSrc = imageSrc;
+        this.lineWidth = lineWidth;
+        this.lineColor = lineColor;
+        this.lineHead = lineHead;
+        this.fontFamily = fontFamily;
+        this.fontSize = fontSize;
+        this.fontColor = fontColor;
+        this.fontStyle = fontStyle;
+        this.fontAlign = fontAlign;
+        this.fontBaseline = fontBaseline;
+        this.mark = mark;
+        this.orderType = orderType;
     }
 
     /**
@@ -91,7 +91,7 @@ var CanvasExercise = function () {
          * @returns {string|*}
          */
         value: function getMark() {
-            return this._mark;
+            return this.mark;
         }
 
         /**
@@ -111,7 +111,7 @@ var CanvasExercise = function () {
                 img.addEventListener("load", this._onLoadImage.bind(this), false);
 
                 // Set source path of image
-                img.src = this._imageSrc;
+                img.src = this.imageSrc;
             }
         }
     }, {
@@ -130,7 +130,7 @@ var CanvasExercise = function () {
             ctx = this._canvasElement.getContext("2d");
 
             // setting canvas divisor to use when width and/or display resolution changes
-            this._canvasDivisor = imageWidth / this._canvasWidth;
+            this._canvasDivisor = imageWidth / this.canvasWidth;
 
             var finalWidth = Math.round(imageWidth / this._canvasDivisor),
                 finalHeight = Math.round(imageHeight / this._canvasDivisor);
@@ -223,10 +223,10 @@ var AssociateCanvasExercise = function (_CanvasExercise) {
         // own properties of the class
         var _this = _possibleConstructorReturn(this, (AssociateCanvasExercise.__proto__ || Object.getPrototypeOf(AssociateCanvasExercise)).call(this, canvasElementId, canvasWidth, imageSrc, lineWidth, lineColor, lineHead, fontFamily, fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType));
 
-        _this._listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
-        _this._listObjectsConnections = listObjectsConnections; // array of objects connections in the image
+        _this.listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
+        _this.listObjectsConnections = listObjectsConnections; // array of objects connections in the image
         _this._listObjectsAssociated = []; // array to store the array of objects coordinates associated by user
-        _this._strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
+        _this.strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
         _this._beginClickCoord = []; // store the coordinates of the 1st click event in format [x,y]
         _this._numberAssociationsConnected = 0;
 
@@ -278,8 +278,8 @@ var AssociateCanvasExercise = function (_CanvasExercise) {
                             }
                         }
 
-                        ctx.lineWidth = this._lineWidth;
-                        ctx.strokeStyle = this._lineColor;
+                        ctx.lineWidth = this.lineWidth;
+                        ctx.strokeStyle = this.lineColor;
                         ctx.beginPath();
                         ctx.moveTo(this._beginClickCoord[0], this._beginClickCoord[1]);
                         ctx.lineTo(current_x, current_y);
@@ -310,9 +310,9 @@ var AssociateCanvasExercise = function (_CanvasExercise) {
         key: '_findBeginCoordsInConnections',
         value: function _findBeginCoordsInConnections(beginObject) {
             // looping the list of objects coordinates
-            for (var i = 0; i < this._listObjectsCoords.length; i++) {
+            for (var i = 0; i < this.listObjectsCoords.length; i++) {
 
-                var value1 = JSON.stringify(this._listObjectsCoords[i]),
+                var value1 = JSON.stringify(this.listObjectsCoords[i]),
                     value2 = JSON.stringify(beginObject);
 
                 // looking for the index of the begin object
@@ -325,9 +325,9 @@ var AssociateCanvasExercise = function (_CanvasExercise) {
         key: '_findEndCoordsInConnections',
         value: function _findEndCoordsInConnections(endObject, index) {
             // looping the list of objects connections coordinates
-            for (var i = 0; i < this._listObjectsConnections[index].length; i++) {
+            for (var i = 0; i < this.listObjectsConnections[index].length; i++) {
 
-                var value1 = JSON.stringify(this._listObjectsConnections[index][i]),
+                var value1 = JSON.stringify(this.listObjectsConnections[index][i]),
                     value2 = JSON.stringify(endObject);
 
                 // looking for the index of the begin object
@@ -349,20 +349,20 @@ var AssociateCanvasExercise = function (_CanvasExercise) {
                 y1 = void 0;
 
             // looping the list of objects coordinates
-            for (var i = 0; i < this._listObjectsCoords.length; i++) {
+            for (var i = 0; i < this.listObjectsCoords.length; i++) {
 
                 // Coordinates of the images
                 // The canvas divisor allow to calc the exact position of every coordinate,
                 // even if the canvas element is positioned anywhere inside the web page
-                x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-                y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-                x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-                y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+                x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+                y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+                x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+                y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
                 // asking if a valid object was clicked, based on coordinates of objects and click event
                 if (x <= coords[0] && coords[0] <= x1 && y <= coords[1] && coords[1] <= y1) {
 
-                    return this._listObjectsCoords[i];
+                    return this.listObjectsCoords[i];
                 }
             }
 
@@ -372,8 +372,8 @@ var AssociateCanvasExercise = function (_CanvasExercise) {
         key: '_getNumberOfConnections',
         value: function _getNumberOfConnections() {
             var counter = 0;
-            for (var i = 0; i < this._listObjectsConnections.length; i++) {
-                counter += this._listObjectsConnections[i].length;
+            for (var i = 0; i < this.listObjectsConnections.length; i++) {
+                counter += this.listObjectsConnections[i].length;
             }
             return counter;
         }
@@ -454,10 +454,10 @@ var GapMatchCanvasExercise = function (_CanvasExercise2) {
         // own properties of the class
         var _this2 = _possibleConstructorReturn(this, (GapMatchCanvasExercise.__proto__ || Object.getPrototypeOf(GapMatchCanvasExercise)).call(this, canvasElementId, canvasWidth, imageSrc, lineWidth, lineColor, lineHead, fontFamily, fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType));
 
-        _this2._listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
-        _this2._listObjectsTags = listObjectsTags; // array of objects tags in the image
+        _this2.listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
+        _this2.listObjectsTags = listObjectsTags; // array of objects tags in the image
         _this2._listObjectsTagged = []; // array to store the array of objects coordinates tagged by user
-        _this2._strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
+        _this2.strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
 
         // binding click event to canvas element to allow the gap match exercise execution
         _this2._canvasElement.addEventListener("click", _this2.clickAction.bind(_this2), false);
@@ -485,7 +485,7 @@ var GapMatchCanvasExercise = function (_CanvasExercise2) {
                 var ctx = this._canvasElement.getContext("2d");
 
                 // asking if object clicked was matched before
-                if (!this._isTaggedExercise(this._listObjectsTagged, [current_x, current_y], this._canvasDivisor, this._listObjectsTags.length)) {
+                if (!this._isTaggedExercise(this._listObjectsTagged, [current_x, current_y], this._canvasDivisor, this.listObjectsTags.length)) {
 
                     // declaring variables
                     var x = void 0,
@@ -497,44 +497,44 @@ var GapMatchCanvasExercise = function (_CanvasExercise2) {
                         op = void 0;
 
                     // looping the list of objects coordinates
-                    for (var i = 0; i < this._listObjectsCoords.length; i++) {
+                    for (var i = 0; i < this.listObjectsCoords.length; i++) {
 
                         // Coordinates of the images
                         // The canvas divisor allow to calc the exact position of every coordinate,
                         // even if the canvas element is positioned anywhere inside the web page
-                        x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-                        y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-                        x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-                        y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+                        x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+                        y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+                        x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+                        y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
                         // init text properties
-                        ctx.font = this._fontStyle + ' ' + this._fontSize + '  ' + this._fontFamily;
-                        ctx.fillStyle = this._fontColor;
-                        ctx.textAlign = this._fontAlign;
-                        ctx.textBaseline = this._fontBaseline;
+                        ctx.font = this.fontStyle + ' ' + this.fontSize + '  ' + this.fontFamily;
+                        ctx.fillStyle = this.fontColor;
+                        ctx.textAlign = this.fontAlign;
+                        ctx.textBaseline = this.fontBaseline;
 
                         // loop control variable
                         op = false;
 
                         // asking if a valid object was clicked, based on coordinates of objects and click event
-                        if (x <= current_x && current_x <= x1 && y <= current_y && current_y <= y1 && this._listObjectsTags.length > 0) {
+                        if (x <= current_x && current_x <= x1 && y <= current_y && current_y <= y1 && this.listObjectsTags.length > 0) {
 
                             // coordinates of the object center
                             cent_x = Math.round(x1 - (x1 - x) / 2);
                             cent_y = Math.round(y1 - (y1 - y) / 2);
 
                             // write tag string
-                            ctx.fillText(this._listObjectsTags[0], cent_x, cent_y);
+                            ctx.fillText(this.listObjectsTags[0], cent_x, cent_y);
 
                             // Fill rectangle
-                            if (this._strokeRectObject) {
-                                ctx.lineWidth = this._lineWidth;
-                                ctx.strokeStyle = this._lineColor;
+                            if (this.strokeRectObject) {
+                                ctx.lineWidth = this.lineWidth;
+                                ctx.strokeStyle = this.lineColor;
                                 ctx.strokeRect(x, y, x1 - x, y1 - y);
                             }
 
                             // update tagged exercises
-                            this._listObjectsTagged[this._listObjectsTagged.length] = [this._listObjectsTags.shift(), this._listObjectsCoords[i]];
+                            this._listObjectsTagged[this._listObjectsTagged.length] = [this.listObjectsTags.shift(), this.listObjectsCoords[i]];
 
                             op = true;
                         }
@@ -555,8 +555,8 @@ var GapMatchCanvasExercise = function (_CanvasExercise2) {
     }, {
         key: 'getListObjectsCoords',
         value: function getListObjectsCoords() {
-            console.log(JSON.stringify(this._listObjectsCoords));
-            return this._listObjectsCoords;
+            console.log(JSON.stringify(this.listObjectsCoords));
+            return this.listObjectsCoords;
         }
 
         /**
@@ -567,8 +567,8 @@ var GapMatchCanvasExercise = function (_CanvasExercise2) {
     }, {
         key: 'getListObjectsTags',
         value: function getListObjectsTags() {
-            console.log(JSON.stringify(this._listObjectsTags));
-            return this._listObjectsTags;
+            console.log(JSON.stringify(this.listObjectsTags));
+            return this.listObjectsTags;
         }
 
         /**
@@ -673,10 +673,10 @@ var OrderCanvasExercise = function (_CanvasExercise3) {
         // own properties of the class
         var _this3 = _possibleConstructorReturn(this, (OrderCanvasExercise.__proto__ || Object.getPrototypeOf(OrderCanvasExercise)).call(this, canvasElementId, canvasWidth, imageSrc, lineWidth, lineColor, lineHead, fontFamily, fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType));
 
-        _this3._listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
+        _this3.listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
         _this3._listObjectsOrdered = []; // array to store the array of objects coordinates arranged by user
         _this3._lastOrderNumber = 0; // last order assigned
-        _this3._strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
+        _this3.strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
 
         // binding click event to canvas element to allow the order exercise execution
         _this3._canvasElement.addEventListener("click", _this3.clickAction.bind(_this3), false);
@@ -704,7 +704,7 @@ var OrderCanvasExercise = function (_CanvasExercise3) {
                 var ctx = this._canvasElement.getContext("2d");
 
                 // getting number of objects by list of object coordinates
-                var numberObjects = this._listObjectsCoords.length;
+                var numberObjects = this.listObjectsCoords.length;
 
                 // asking if object clicked was ordered before
                 if (!this._isOrderedExercise(this._listObjectsOrdered, [current_x, current_y], this._canvasDivisor, this._lastOrderNumber, numberObjects)) {
@@ -721,21 +721,21 @@ var OrderCanvasExercise = function (_CanvasExercise3) {
                         op = void 0;
 
                     // looping the list of objects coordinates
-                    for (var i = 0; i < this._listObjectsCoords.length; i++) {
+                    for (var i = 0; i < this.listObjectsCoords.length; i++) {
 
                         // Coordinates of the images
                         // The canvas divisor allow to calc the exact position of every coordinate,
                         // even if the canvas element is positioned anywhere inside the web page
-                        x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-                        y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-                        x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-                        y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+                        x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+                        y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+                        x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+                        y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
                         // init text properties
-                        ctx.font = this._fontStyle + ' ' + this._fontSize + '  ' + this._fontFamily;
-                        ctx.fillStyle = this._fontColor;
-                        ctx.textAlign = this._fontAlign;
-                        ctx.textBaseline = this._fontBaseline;
+                        ctx.font = this.fontStyle + ' ' + this.fontSize + '  ' + this.fontFamily;
+                        ctx.fillStyle = this.fontColor;
+                        ctx.textAlign = this.fontAlign;
+                        ctx.textBaseline = this.fontBaseline;
 
                         // alert(x + " <= " + cur_x + " - " + cur_x + " <= " + x1 + " --- " + y + " <= " + cur_y + " - " + cur_y + " <= " + y1);
 
@@ -756,7 +756,7 @@ var OrderCanvasExercise = function (_CanvasExercise3) {
                             order = this._lastOrderNumber.toString();
 
                             // asking what kind of order is being used
-                            if (this._orderType === CanvasExercise.orderTypeAlpha) {
+                            if (this.orderType === CanvasExercise.orderTypeAlpha) {
 
                                 // if alphabetic order was selected, then calculate the letter order
                                 tmp = Math.floor(this._lastOrderNumber / 26);
@@ -767,14 +767,14 @@ var OrderCanvasExercise = function (_CanvasExercise3) {
                             ctx.fillText(order, cent_x, cent_y);
 
                             // fill rectangle
-                            if (this._strokeRectObject) {
-                                ctx.lineWidth = this._lineWidth;
-                                ctx.strokeStyle = this._lineColor;
+                            if (this.strokeRectObject) {
+                                ctx.lineWidth = this.lineWidth;
+                                ctx.strokeStyle = this.lineColor;
                                 ctx.strokeRect(x, y, x1 - x, y1 - y);
                             }
 
                             // update list of ordered objects
-                            this._listObjectsOrdered[this._listObjectsOrdered.length] = this._listObjectsCoords[i];
+                            this._listObjectsOrdered[this._listObjectsOrdered.length] = this.listObjectsCoords[i];
 
                             op = true;
                         }
@@ -893,9 +893,9 @@ var PositionObjectCanvasExercise = function (_CanvasExercise4) {
         // own properties of the class
         var _this4 = _possibleConstructorReturn(this, (PositionObjectCanvasExercise.__proto__ || Object.getPrototypeOf(PositionObjectCanvasExercise)).call(this, canvasElementId, canvasWidth, imageSrc, lineWidth, lineColor, lineHead, fontFamily, fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType));
 
-        _this4._listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
+        _this4.listObjectsCoords = listObjectsCoords; // array of objects coordinates in the image
         _this4._listObjectsAssociated = []; // array to store the array of objects coordinates positioned by user
-        _this4._strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
+        _this4.strokeRectObject = strokeRectObject; // define if object will be put into a rectangle
         _this4._numberAssociationsConnected = 0;
 
         // binding click event to canvas element to allow the position object exercise execution
@@ -925,7 +925,7 @@ var PositionObjectCanvasExercise = function (_CanvasExercise4) {
                 var ctx = this._canvasElement.getContext("2d");
 
                 // asking if there is elements to be positioned
-                if (this._numberAssociationsConnected < this._listObjectsCoords.length) {
+                if (this._numberAssociationsConnected < this.listObjectsCoords.length) {
 
                     // declaring variables
                     var x = void 0,
@@ -935,27 +935,27 @@ var PositionObjectCanvasExercise = function (_CanvasExercise4) {
                         op = void 0;
 
                     // init text properties
-                    ctx.font = this._fontStyle + ' ' + this._fontSize + '  ' + this._fontFamily;
-                    ctx.fillStyle = this._fontColor;
-                    ctx.textAlign = this._fontAlign;
-                    ctx.textBaseline = this._fontBaseline;
+                    ctx.font = this.fontStyle + ' ' + this.fontSize + '  ' + this.fontFamily;
+                    ctx.fillStyle = this.fontColor;
+                    ctx.textAlign = this.fontAlign;
+                    ctx.textBaseline = this.fontBaseline;
 
                     // fill mark or letter
-                    ctx.fillText(this._mark, current_x, current_y);
+                    ctx.fillText(this.mark, current_x, current_y);
 
                     // decrement number of objects to be positioned
                     this._numberAssociationsConnected++;
 
                     // looping the list of objects coordinates
-                    for (var i = 0; i < this._listObjectsCoords.length; i++) {
+                    for (var i = 0; i < this.listObjectsCoords.length; i++) {
 
                         // Coordinates of the images
                         // The canvas divisor allow to calc the exact position of every coordinate,
                         // even if the canvas element is positioned anywhere inside the web page
-                        x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-                        y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-                        x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-                        y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+                        x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+                        y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+                        x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+                        y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
                         // alert(x + " <= " + cur_x + " - " + cur_x + " <= " + x1 + " --- " + y + " <= " + cur_y + " - " + cur_y + " <= " + y1);
 
@@ -966,14 +966,14 @@ var PositionObjectCanvasExercise = function (_CanvasExercise4) {
                         if (x <= current_x && current_x <= x1 && y <= current_y && current_y <= y1) {
 
                             // fill rectangle
-                            if (this._strokeRectObject) {
-                                ctx.lineWidth = this._lineWidth;
-                                ctx.strokeStyle = this._lineColor;
+                            if (this.strokeRectObject) {
+                                ctx.lineWidth = this.lineWidth;
+                                ctx.strokeStyle = this.lineColor;
                                 ctx.strokeRect(x, y, x1 - x, y1 - y);
                             }
 
                             // update list of positioned objects
-                            this._listObjectsAssociated[this._listObjectsAssociated.length] = this._listObjectsCoords[i];
+                            this._listObjectsAssociated[this._listObjectsAssociated.length] = this.listObjectsCoords[i];
 
                             op = true;
                         }
@@ -1009,9 +1009,9 @@ PositionObjectCanvasExercise.exports = PositionObjectCanvasExercise;
 // let coords = [[80, 35, 375, 283], [395, 120, 715, 370], [36, 352, 88, 404], [520, 20, 590, 76]];
 //
 // const ex = new PositionObjectCanvasExercise('myCanvas');
-// ex._listObjectsCoords = coords;
-// ex._canvasWidth = 700;
-// ex._imageSrc = 'plasma-desktop.jpg';
+// ex.listObjectsCoords = coords;
+// ex.canvasWidth = 700;
+// ex.imageSrc = 'plasma-desktop.jpg';
 // ex.initializeCanvas();
 //
 // let marks = [];

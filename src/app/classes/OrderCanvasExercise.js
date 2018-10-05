@@ -41,10 +41,10 @@ class OrderCanvasExercise extends CanvasExercise {
             fontSize, fontColor, fontStyle, fontAlign, fontBaseline, mark, orderType);
 
         // own properties of the class
-        this._listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
+        this.listObjectsCoords = listObjectsCoords;    // array of objects coordinates in the image
         this._listObjectsOrdered = [];                  // array to store the array of objects coordinates arranged by user
         this._lastOrderNumber = 0;                      // last order assigned
-        this._strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
+        this.strokeRectObject = strokeRectObject;      // define if object will be put into a rectangle
 
         // binding click event to canvas element to allow the order exercise execution
         this._canvasElement.addEventListener("click", this.clickAction.bind(this), false);
@@ -67,7 +67,7 @@ class OrderCanvasExercise extends CanvasExercise {
             let ctx = this._canvasElement.getContext("2d");
 
             // getting number of objects by list of object coordinates
-            let numberObjects = this._listObjectsCoords.length;
+            let numberObjects = this.listObjectsCoords.length;
 
             // asking if object clicked was ordered before
             if (!this._isOrderedExercise(this._listObjectsOrdered, [current_x, current_y], this._canvasDivisor, this._lastOrderNumber, numberObjects)) {
@@ -76,21 +76,21 @@ class OrderCanvasExercise extends CanvasExercise {
                 let x, y, x1, y1, cent_x, cent_y, order, tmp, op;
 
                 // looping the list of objects coordinates
-                for (let i = 0; i < this._listObjectsCoords.length; i++) {
+                for (let i = 0; i < this.listObjectsCoords.length; i++) {
 
                     // Coordinates of the images
                     // The canvas divisor allow to calc the exact position of every coordinate,
                     // even if the canvas element is positioned anywhere inside the web page
-                    x = Math.round(this._listObjectsCoords[i][0] / this._canvasDivisor);
-                    y = Math.round(this._listObjectsCoords[i][1] / this._canvasDivisor);
-                    x1 = Math.round(this._listObjectsCoords[i][2] / this._canvasDivisor);
-                    y1 = Math.round(this._listObjectsCoords[i][3] / this._canvasDivisor);
+                    x = Math.round(this.listObjectsCoords[i][0] / this._canvasDivisor);
+                    y = Math.round(this.listObjectsCoords[i][1] / this._canvasDivisor);
+                    x1 = Math.round(this.listObjectsCoords[i][2] / this._canvasDivisor);
+                    y1 = Math.round(this.listObjectsCoords[i][3] / this._canvasDivisor);
 
                     // init text properties
-                    ctx.font = `${this._fontStyle} ${this._fontSize}  ${this._fontFamily}`;
-                    ctx.fillStyle = this._fontColor;
-                    ctx.textAlign = this._fontAlign;
-                    ctx.textBaseline = this._fontBaseline;
+                    ctx.font = `${this.fontStyle} ${this.fontSize}  ${this.fontFamily}`;
+                    ctx.fillStyle = this.fontColor;
+                    ctx.textAlign = this.fontAlign;
+                    ctx.textBaseline = this.fontBaseline;
 
                     // alert(x + " <= " + cur_x + " - " + cur_x + " <= " + x1 + " --- " + y + " <= " + cur_y + " - " + cur_y + " <= " + y1);
 
@@ -113,7 +113,7 @@ class OrderCanvasExercise extends CanvasExercise {
                         order = this._lastOrderNumber.toString();
 
                         // asking what kind of order is being used
-                        if (this._orderType === CanvasExercise.orderTypeAlpha) {
+                        if (this.orderType === CanvasExercise.orderTypeAlpha) {
 
                             // if alphabetic order was selected, then calculate the letter order
                             tmp = Math.floor(this._lastOrderNumber / 26);
@@ -125,14 +125,14 @@ class OrderCanvasExercise extends CanvasExercise {
                         ctx.fillText(order, cent_x, cent_y);
 
                         // fill rectangle
-                        if (this._strokeRectObject) {
-                            ctx.lineWidth = this._lineWidth;
-                            ctx.strokeStyle = this._lineColor;
+                        if (this.strokeRectObject) {
+                            ctx.lineWidth = this.lineWidth;
+                            ctx.strokeStyle = this.lineColor;
                             ctx.strokeRect(x, y, x1 - x, y1 - y);
                         }
 
                         // update list of ordered objects
-                        this._listObjectsOrdered[this._listObjectsOrdered.length] = this._listObjectsCoords[i];
+                        this._listObjectsOrdered[this._listObjectsOrdered.length] = this.listObjectsCoords[i];
 
                         op = true;
                     }
