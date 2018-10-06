@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
+const spawn = require('child_process').spawn;
 const conventionalChangelog = require('gulp-conventional-changelog');
 const conventionalGithubReleaser = require('conventional-github-releaser');
 const bump = require('gulp-bump');
@@ -85,26 +86,13 @@ gulp.task('bump-version', function () {
  */
 gulp.task('changelog', function () {
     return gulp.src('CHANGELOG.md', {
-            buffer: false
+            buffer: true
         })
         .pipe(conventionalChangelog({
             releaseCount: 1
         }))
         .pipe(gulp.dest('./'));
 
-});
-
-/**
- * Copy files to dist
- */
-gulp.task('changelog-dist', function () {
-    runSequence(
-        'changelog', function () {
-            fse.copySync('CHANGELOG.md', gulpDest + 'CHANGELOG.md');
-            fse.copySync('README.md', gulpDest + 'README.md');
-            fse.copySync('LICENSE', gulpDest + 'LICENSE');
-        }
-    );
 });
 
 /**
@@ -140,9 +128,9 @@ gulp.task('create-new-tag', function (cb) {
 });
 
 /**
- * Make release in GitHub
+ * Make publish in GitHub
  */
-gulp.task('github-release', function (done) {
+gulp.task('github-publish', function (done) {
     conventionalGithubReleaser({
         type: "oauth",
         token: process.env.GITHUB_TOKEN
@@ -152,21 +140,20 @@ gulp.task('github-release', function (done) {
 });
 
 /**
- * Make the final release
+ * Make the GitHub release
  */
-gulp.task('release', function (callback) {
+gulp.task('github-release', function (callback) {
     runSequence(
         'bump-version',
-        'changelog-dist',
         'commit-changes',
         'push-changes',
         'create-new-tag',
-        'github-release',
+        'github-publish',
         function (error) {
             if (error) {
                 console.log(error.message);
             } else {
-                console.log('RELEASE FINISHED SUCCESSFULLY');
+                console.log('RELEASE TO GITHUB FINISHED SUCCESSFULLY');
             }
             callback(error);
         });
@@ -177,5 +164,75 @@ gulp.task('release', function (callback) {
  */
 
 
+/**
+ * -------- RELEASING NPMJS.COM TASKS [END] ------->
+ *
+ * Bumping version of dist
+ */
+gulp.task('bump-version-dist', function () {
+// Similar to bump-version
+    return gulp.src([gulpDest + './package.json'])
+        .pipe(bump({type: args['git-version']}).on('error', gutil.log))
+        .pipe(gulp.dest(gulpDest));
+});
 
+/**
+ * Copy files to dist
+ */
+gulp.task('prepare-dist', function () {
+    fse.copySync('CHANGELOG.md', gulpDest + 'CHANGELOG.md');
+    fse.copySync('README.md', gulpDest + 'README.md');
+    fse.copySync('LICENSE', gulpDest + 'LICENSE');
+});
+
+/**
+ * Make publish in npmjs.com
+ */
+gulp.task('npm-publish', function (done) {
+    spawn('npm', ['publish'], { stdio: 'inherit' }).on('close', done);
+});
+
+/**
+ * Make the NPM release
+ */
+gulp.task('npm-release', function (callback) {
+    runSequence(
+        'bump-version-dist',
+        'prepare-dist',
+        'npm-publish',
+        function (error) {
+            if (error) {
+                console.log(error.message);
+            } else {
+                console.log('RELEASE TO NPMJS FINISHED SUCCESSFULLY');
+            }
+            callback(error);
+        });
+});
+
+/**
+ * -------- RELEASING NPMJS.COM TASKS [END] ------->
+ */
+
+/**
+ * -------- FINAL COMPLETE RELEASING TASKS [BEGIN] ------->
+ */
+
+gulp.task('release', function (callback) {
+    runSequence(
+        'github-release',
+        'npm-release',
+        function (error) {
+            if (error) {
+                console.log(error.message);
+            } else {
+                console.log('COMPLETE RELEASE FINISHED SUCCESSFULLY');
+            }
+            callback(error);
+        });
+});
+
+/**
+ * -------- FINAL COMPLETE RELEASING TASKS [END] ------->
+ */
 gulp.task('default', ['build']);

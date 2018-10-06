@@ -1,0 +1,19 @@
+{
+  "version": "0.0.0",
+  "name": "wice.js",
+  "description": "WICE.js, for Web Interactive Canvas Exercises, is a library to create interactive exercises using HTML Canvas.",
+  "homepage": "https://yulioaj290.github.io/wice.js",
+  "main": "dist/wice.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yulioaj290/wice.js"
+  },
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Yulio Aleman Jimenez",
+      "email": "yulioaj290@gmail.com",
+      "web": "https://github.com/yulioaj290"
+    }
+  ]
+}
