@@ -88,7 +88,7 @@ gulp.task('changelog', function () {
             buffer: false
         })
         .pipe(conventionalChangelog({
-            releaseCount: 0
+            releaseCount: 1
         }))
         .pipe(gulp.dest('./'));
 
