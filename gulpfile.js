@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const spawn = require('child_process').spawn;
 const conventionalChangelog = require('gulp-conventional-changelog');
-const conventionalGithubReleaser = require('conventional-github-releaser');
 const bump = require('gulp-bump');
 const gutil = require('gulp-util');
 const git = require('gulp-git');
@@ -14,7 +13,6 @@ const rename = require("gulp-rename");
 const terser = require('gulp-terser');
 const minimist = require('minimist');
 const args = minimist(process.argv.slice(2), {string: 'git-version', default: {'git-version': 'patch'}});
-require('env2')('.env');    // loads all entries into process.env
 
 /**
  * -------- BUILDING CODE [BEGIN] ------->
@@ -102,13 +100,32 @@ gulp.task('changelog', function () {
 });
 
 /**
+ * Bumping version of dist
+ */
+gulp.task('bump-version-dist', function () {
+// Similar to bump-version
+    return gulp.src([gulpDest + './package.json'])
+        .pipe(bump({type: args['git-version']}).on('error', gutil.log))
+        .pipe(gulp.dest(gulpDest));
+});
+
+/**
+ * Copy files to dist
+ */
+gulp.task('prepare-dist', function () {
+    fse.copySync('CHANGELOG.md', gulpDest + 'CHANGELOG.md');
+    fse.copySync('README.md', gulpDest + 'README.md');
+    fse.copySync('LICENSE', gulpDest + 'LICENSE');
+});
+
+/**
  * Commit and push changes
  */
 gulp.task('commit-changes', function () {
     var version = getPackageJsonVersion();
     return gulp.src('.')
         .pipe(git.add())
-        .pipe(git.commit('[Prerelease] Bumped version number' + version));
+        .pipe(git.commit('[Prerelease] Bumped version number ' + version));
 });
 
 gulp.task('push-changes', function (cb) {
@@ -129,27 +146,16 @@ gulp.task('create-new-tag', function (cb) {
 });
 
 /**
- * Make publish in GitHub
- */
-gulp.task('github-publish', function (done) {
-    conventionalGithubReleaser({
-        type: "oauth",
-        token: process.env.GITHUB_TOKEN
-    }, {
-        preset: 'angular'
-    }, done);
-});
-
-/**
  * Make the GitHub release
  */
 gulp.task('github-release', function (callback) {
     runSequence(
         'bump-version',
+        'bump-version-dist',
+        'prepare-dist',
         'commit-changes',
         'push-changes',
         'create-new-tag',
-        'github-publish',
         function (error) {
             if (error) {
                 console.log(error.message);
@@ -168,28 +174,10 @@ gulp.task('github-release', function (callback) {
 /**
  * -------- RELEASING NPMJS.COM TASKS [END] ------->
  *
- * Bumping version of dist
- */
-gulp.task('bump-version-dist', function () {
-// Similar to bump-version
-    return gulp.src([gulpDest + './package.json'])
-        .pipe(bump({type: args['git-version']}).on('error', gutil.log))
-        .pipe(gulp.dest(gulpDest));
-});
-
-/**
- * Copy files to dist
- */
-gulp.task('prepare-dist', function () {
-    fse.copySync('CHANGELOG.md', gulpDest + 'CHANGELOG.md');
-    fse.copySync('README.md', gulpDest + 'README.md');
-    fse.copySync('LICENSE', gulpDest + 'LICENSE');
-});
-
-/**
  * Make publish in npmjs.com
  */
 gulp.task('npm-publish', function (done) {
+    process.chdir('./wice.js/');
     spawn('npm', ['publish'], { stdio: 'inherit' }).on('close', done);
 });
 
@@ -198,8 +186,6 @@ gulp.task('npm-publish', function (done) {
  */
 gulp.task('npm-release', function (callback) {
     runSequence(
-        'bump-version-dist',
-        'prepare-dist',
         'npm-publish',
         function (error) {
             if (error) {
