@@ -5,7 +5,7 @@ const conventionalGithubReleaser = require('conventional-github-releaser');
 const bump = require('gulp-bump');
 const gutil = require('gulp-util');
 const git = require('gulp-git');
-const fs = require('fs');
+const fse = require('fs-extra');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
@@ -21,7 +21,8 @@ require('env2')('.env');    // loads all entries into process.env
  * Define initial variables
  */
 const gulpSrc = 'src/app/classes/',
-    gulpDest = 'build/js/',
+    gulpDest = 'wice.js/',
+    gulpDestDist = gulpDest + 'dist/',
     sourceFiles = [
         gulpSrc + 'CanvasExercise.js',
         gulpSrc + 'AssociateCanvasExercise.js',
@@ -42,17 +43,17 @@ gulp.task('compile', function () {
             presets: ["env"]
         }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(gulpDest));
+        .pipe(gulp.dest(gulpDestDist));
 });
 
 /**
  * Minify the code with Terser
  */
 gulp.task('minify', function () {
-    return gulp.src(gulpDest + 'wice.js')
+    return gulp.src(gulpDestDist + 'wice.js')
         .pipe(terser())
         .pipe(rename('wice.min.js'))
-        .pipe(gulp.dest(gulpDest));
+        .pipe(gulp.dest(gulpDestDist));
 });
 
 /**
@@ -87,9 +88,23 @@ gulp.task('changelog', function () {
             buffer: false
         })
         .pipe(conventionalChangelog({
-            preset: 'angular'
+            releaseCount: 0
         }))
         .pipe(gulp.dest('./'));
+
+});
+
+/**
+ * Copy files to dist
+ */
+gulp.task('changelog-dist', function () {
+    runSequence(
+        'changelog', function () {
+            fse.copySync('CHANGELOG.md', gulpDest + 'CHANGELOG.md');
+            fse.copySync('README.md', gulpDest + 'README.md');
+            fse.copySync('LICENSE', gulpDest + 'LICENSE');
+        }
+    );
 });
 
 /**
@@ -120,7 +135,7 @@ gulp.task('create-new-tag', function (cb) {
     function getPackageJsonVersion() {
         // We parse the json file instead of using require because require caches
         // multiple calls so the version number won't be updated
-        return JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
+        return JSON.parse(fse.readJsonSync('./package.json')).version;
     }
 });
 
@@ -142,7 +157,7 @@ gulp.task('github-release', function (done) {
 gulp.task('release', function (callback) {
     runSequence(
         'bump-version',
-        'changelog',
+        'changelog-dist',
         'commit-changes',
         'push-changes',
         'create-new-tag',
