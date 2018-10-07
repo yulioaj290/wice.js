@@ -1,3 +1,8 @@
+---
+layout: default
+title: Home
+---
+
 # WICE.js
 
 WICE.js provides functions to interact with objects inside HTML canvas element using relative rectangle coordinates.
@@ -14,7 +19,7 @@ requests on [github](https://github.com/yulioaj290/wice.js).
 
 ## Installation
 
-The easiest way to install acorn is with [`npm`][npm].
+The easiest way to install WICE.js is with [`npm`][npm].
 
 [npm]: https://www.npmjs.com/
 
@@ -22,7 +27,7 @@ The easiest way to install acorn is with [`npm`][npm].
 npm install wice.js
 ```
 
-Alternately, you can download the source and build acorn yourself:
+Alternately, you can download the source and build WICE.js yourself:
 
 ```sh
 git clone https://github.com/yulioaj290/wice.js.git
@@ -35,7 +40,7 @@ You must to include `wice.js` or `wice.min.js` file to your HTML page to get rea
 
 ## Types of canvas exercises supported
 
-The following are the main type of exercises that WICE.js support, but you may find some another type possible to perform with exiting functions.
+The following are the main type of exercises that WICE.js support, but you may find some another type possible to perform with existent functions.
 
 * Order Exercise
 * Position Object Exercise
@@ -47,7 +52,7 @@ The following are the main type of exercises that WICE.js support, but you may f
 
 Property | Value | Description
 -------- | ----- | -----------
-canvasElementId | String <br /> Eg.: "myCanvas" | ID attribute of the canvas HTML element to link with
+canvasElementId | String <br /> Eg.: "myCanvas" | ID attribute of the canvas HTML element to link
 canvasWidth | Integer <br /> Eg.: 500 | Width of the canvas element (1)
 imageSrc | String <br /> Eg.: "./my-image.jpg" | Image path to load on the canvas element
 lineWidth | Integer <br /> Eg.: 2 | Width used when draw lines over canvas element (1)
@@ -87,7 +92,7 @@ ex.initializeCanvas();
 
 ## Order Exercise
 
-Allow to perform order assignment to objects over canvas using coordinates
+Allows to perform ordering assignment to objects over canvas using coordinates
 
 #### Properties
 
@@ -118,7 +123,7 @@ ex.initializeCanvas();
 
 ## Position Object & Select Point Exercises
 
-Allow to draw a mark in the position over canvas to identify objects using coordinates
+Allows to draw a mark in the position over canvas to identify objects using coordinates
 
 #### Properties
 
@@ -156,7 +161,7 @@ ex.initializeCanvas();
 
 ## Associate Exercises
 
-Allow to draw a line between two points to associate two objects over canvas, identified using coordinates
+Allows to draw a line between two points to associate two objects over canvas, identified using coordinates
 
 #### Properties
 
@@ -213,7 +218,7 @@ Final Objects Connections
 
 ## Gap Match Exercises
 
-Allow to draw a text over objects inside the canvas element, identified using coordinates
+Allows to draw a text over objects inside the canvas element, identified using coordinates
 
 #### Properties
 
@@ -258,3 +263,12 @@ Objects Tags
 [2] => [36, 352, 88, 404]   (Building)
 ```
 
+<!-- 
+<div id="home">
+  <h1>Blog Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div> -->
