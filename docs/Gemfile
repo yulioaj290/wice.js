@@ -1,11 +1,10 @@
-# source 'https://rubygems.org'
-source 'http://nexus.prod.uci.cu/repository/rubygems-proxy/'
+source 'https://rubygems.org'
+# source 'http://nexus.prod.uci.cu/repository/rubygems-proxy/'
 
 #gemspec
 
 gem 'jekyll'
 gem 'jekyll-paginate'
-gem 'kramdown'
 gem 'pygments.rb'
 gem 'github-pages', group: :jekyll_plugins
 gem 'jekyll-theme-cayman'
